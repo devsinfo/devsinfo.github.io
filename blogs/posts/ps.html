@@ -26,6 +26,10 @@
         
         <h2>Useful Examples</h2>
         <h3>Find Top CPU-Consuming Processes</h3>
+        <p>To display information about all running processes on the Linux server.</p>
+        <pre><code class="bash">ps -aux</code></pre>
+        <p>To filter process information, you can use pipe redirection and grep to find specific process details.</p>
+        <pre><code class="bash">ps -aux|grep -E "sshd|sssd"</code></pre>
         <p>To find the top 15 processes consuming the most CPU, use:</p>
         <pre><code class="bash">ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15</code></pre>
         <p>or</p>
