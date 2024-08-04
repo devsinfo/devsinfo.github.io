@@ -1,7 +1,3 @@
----
-layout: home
-title: "Home"
----
 ##
 
 Here are some of my recent tutorials:
