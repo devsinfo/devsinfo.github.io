@@ -24,11 +24,11 @@ The `ps` command in Linux is a powerful tool used to view information about runn
 
 To find the top 15 processes consuming the most CPU, use:
 ```bash
-#ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15
+ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15
 ```
 or
 ```bash
-#ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%cpu | head -n 15
+ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%cpu | head -n 15
 ```
 To identify the top 15 processes using the most memory, use:
 ```bash
