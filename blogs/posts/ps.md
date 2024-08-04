@@ -4,10 +4,8 @@ title: "ps command"
 categories: tutorial
 ---
 
-## Introduction
-The ps command is a powerful utility for displaying process status and information in Linux operating systems.
 
-# Understanding the `ps` Command and Its Options
+## Understanding the `ps` Command and Its Options
 
 The `ps` command in Linux is a powerful tool used to view information about running processes. Below, we outline some key options and provide useful examples for analyzing CPU and memory usage.
 
@@ -25,31 +23,22 @@ The `ps` command in Linux is a powerful tool used to view information about runn
 ## Useful Examples
 
 To find the top 15 processes consuming the most CPU, use:
-
 ```bash
-ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15
+#ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15
 ```
-
 or
-
-\`\`\`bash
-ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%cpu | head -n 15
-\`\`\`
-
+```bash
+#ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%cpu | head -n 15
+```
 To identify the top 15 processes using the most memory, use:
-
-\`\`\`bash
+```bash
 ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%mem | head -n 15
-\`\`\`
-
+```
 or
-
-\`\`\`bash
+```bash
 ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%mem | head -n 15
-\`\`\`
-
+```
 ---
-
 ### Explanation
 
 - **`-eo`**: Specifies the output format, allowing you to customize which columns to display.
