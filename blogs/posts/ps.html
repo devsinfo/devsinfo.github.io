@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding the ps Command and Its Options</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Understanding the <code>ps</code> Command and Its Options</h2>
+        <p>The <code>ps</code> command in Linux is a powerful tool used to view information about running processes. Below, we outline some key options and provide useful examples for analyzing CPU and memory usage.</p>
+        
+        <h2>Key Options</h2>
+        <ul>
+            <li><strong>comm</strong>: Displays only the executable name of the process.</li>
+            <li><strong>cmd</strong>: Shows the command name along with arguments and additional information.</li>
+            <li><strong>user</strong>: Indicates the owner of the process.</li>
+            <li><strong>start</strong>: Displays the start time of the process.</li>
+            <li><strong>pid</strong>: Process ID.</li>
+            <li><strong>ppid</strong>: Parent process ID.</li>
+            <li><strong>%cpu</strong>: CPU utilization percentage.</li>
+            <li><strong>%mem</strong>: Memory utilization percentage.</li>
+        </ul>
+        
+        <h2>Useful Examples</h2>
+        <h3>Find Top CPU-Consuming Processes</h3>
+        <p>To find the top 15 processes consuming the most CPU, use:</p>
+        <pre><code class="bash">ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%cpu | head -n 15</code></pre>
+        <p>or</p>
+        <pre><code class="bash">ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%cpu | head -n 15</code></pre>
+        
+        <h3>Find Top Memory-Consuming Processes</h3>
+        <p>To identify the top 15 processes using the most memory, use:</p>
+        <pre><code class="bash">ps -eo user,pid,ppid,%mem,%cpu,start,cmd --sort=-%mem | head -n 15</code></pre>
+        <p>or</p>
+        <pre><code class="bash">ps -eo user,pid,ppid,%mem,%cpu,start,comm --sort=-%mem | head -n 15</code></pre>
+        
+        <hr>
+        
+        <h3>Explanation</h3>
+        <ul>
+            <li><strong><code>-eo</code></strong>: Specifies the output format, allowing you to customize which columns to display.</li>
+            <li><strong><code>--sort=-%cpu</code></strong>: Sorts the output by CPU usage in descending order. Similarly, <code>--sort=-%mem</code> sorts by memory usage.</li>
+            <li><strong><code>head -n 15</code></strong>: Limits the output to the top 15 processes.</li>
+        </ul>
+        <p>Using these commands, you can effectively monitor and manage system performance by identifying resource-heavy processes.</p>
+    </div>
+</body>
+</html>
