@@ -19,11 +19,11 @@
 <p></p>
 <p>how to allocate memory for kdump, open below file and "Search for GRUB_CMDLINE_LINUX" and update "crashkernel=auto" in this file. if you want to reseve memory then update memrory</p>
 <pre><code class="bash">#vi /etc/default/grub</code></pre>
-<pre><code class="bash">GRUB_CMDLINE_LINUX="loglevel=3 console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300 crashkernel=128M"</code></pre>
+<pre><codeln class="bash">GRUB_CMDLINE_LINUX="loglevel=3 console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300 crashkernel=128M"</codeln></pre>
 <p></p>
 <p>Now go to "kdump.conf" file "/etc/kdump.conf" and update this "path /var/crash"</p>
 <pre><code class="bash">#vi /etc/kdump.conf</code></pre>
-<pre><code class="bash">path /var/crash</code></pre>
+<pre><codeln class="bash">path /var/crash</codeln></pre>
 <p></p>
 <p>In redhat in this file "/etc/sysconfig/kdump" we don't make any changes.</p>
 <p></p>
@@ -32,21 +32,21 @@
 <p>this feature can be used to signal an operating system when other standard input mechanisms(keyboard, ssh, network, etc.) have ceased to function.</p>
 <p></p>
 <pre><code class="bash">#vim /etc/sysctl.conf</code></pre>
-<pre><code class="bash">kernel.unknown_nmi_panic = 1</code></pre>
-<pre><code class="bash">kernel.panic_on_io_nmi = 1</code></pre>
-<pre><code class="bash">kernel.panic_on_unrecovered_nmi = 1</code></pre>
+<pre><codeln class="bash">kernel.unknown_nmi_panic = 1</codeln></pre>
+<pre><codeln class="bash">kernel.panic_on_io_nmi = 1</codeln></pre>
+<pre><codeln class="bash">kernel.panic_on_unrecovered_nmi = 1</codeln></pre>
 <p></p>
 <p>Out of Memory (OOm) kill event</p>
 <pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
-<pre><code class="bash">vm.panic_on_oom = 1</code></pre>
+<pre><codeln class="bash">vm.panic_on_oom = 1</codeln></pre>
 <p></p>
 <p>CPU Soft Lockup event</p>
 <pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
-<pre><code class="bash">kernel.softlockup_panic = 1</code></pre>
+<pre><codeln class="bash">kernel.softlockup_panic = 1</codeln></pre>
 <p></p>
 <p>Hung/Blocked Task event</p>
 <pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
-<pre><code class="bash">kernel.hung_task_panic = 1</code></pre>
+<pre><codeln class="bash">kernel.hung_task_panic = 1</codeln></pre>
 <p></p>
 <p>Now let's update grub config</p>
 <pre><code class="bash">#grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre>
@@ -86,7 +86,7 @@
 <p>for checking mount point details</p>
 <pre><code class="bash">#crash>mount</code></pre>
 <p>for checking network details</p>
-<pre><code class="bash">crash>net -a</code></pre>
+<pre><codeln class="bash">crash>net -a</codeln></pre>
 <p>to check panic task details</p>
 <pre><code class="bash">#crash> set -p</code></pre>
 </div>
