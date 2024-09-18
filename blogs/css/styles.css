@@ -59,20 +59,20 @@ pre {
     font-size: 0.9rem;
 }
 
+preln {
+    background: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 3px;
+    padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
 code {
     font-family: 'Courier New', Courier, monospace;
     background: #34495e;
     color: #ecf0f1;
     padding: 1px 3px;
-    border-radius: 3px;
-    font-size: 0.9rem;
-}
-
-codeln {
-    font-family: 'Courier New', Courier, monospace;
-    background: #34495e;
-    color: #ecf0f1;
-    padding: 4px 3px;
     border-radius: 3px;
     font-size: 0.9rem;
 }
