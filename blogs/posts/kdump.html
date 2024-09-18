@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding of the Kdump</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head> 
+<body><p>Kdump is a feature of the Linux kernel that creates crash dumps in the event of a kernel crash. When triggered, kdump exports a memory image that can be analyzed for the purposes of debugging and determining the cause of a crash</p>
+<p></p>
+<p>Looking for some configuration for kernel dump (kdump), what will generate the kernel core dump file. Just for distinguish we are not talking about application, we are talking about OS itself crashing.</p>
+<p></p>
+<pre><code class="bash">#sed -e "/^#/d;/^$/d" /etc/sysconfig/kdump</code></pre>
+<p></p>
+<p>To check how much memory is allocated to kdump</p>
+<pre><code class="bash">#dmesg|grep crash</code></pre>
+<p></p>
+<p>how to allocate memory for kdump, open below file and "Search for GRUB_CMDLINE_LINUX" and update "crashkernel=auto" in this file. if you want to reseve memory then update memrory</p>
+<pre><code class="bash">#vi /etc/default/grub</code></pre>
+<pre><code class="bash">#GRUB_CMDLINE_LINUX="loglevel=3 console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300 crashkernel=128M"</code></pre>
+<p></p>
+<p>Now go to "kdump.conf" file "/etc/kdump.conf" and update this "path /var/crash"</p>
+<pre><code class="bash">#vi /etc/kdump.conf</code></pre>
+<pre><code class="bash">#path /var/crash</code></pre>
+<p></p>
+<p>In redhat in this file "/etc/sysconfig/kdump" we don't make any changes.</p>
+<p></p>
+<p>For KDUMP kernel parameters configuration in Linux ::</p>
+<p>Non-Maskable Interrupt (NMI) is a hardware interrupt that cannot be ignored by the processor. It is generally used only for critical hardware errors.</p>
+<p>this feature can be used to signal an operating system when other standard input mechanisms(keyboard, ssh, network, etc.) have ceased to function.</p>
+<p></p>
+<pre><code class="bash">#vim /etc/sysctl.conf</code></pre>
+<pre><code class="bash">#kernel.unknown_nmi_panic = 1</code></pre>
+<pre><code class="bash">#kernel.panic_on_io_nmi = 1</code></pre>
+<pre><code class="bash">#kernel.panic_on_unrecovered_nmi = 1</code></pre>
+<p></p>
+<p>Out of Memory (OOm) kill event</p>
+<pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
+<pre><code class="bash">#vm.panic_on_oom = 1</code></pre>
+<p></p>
+<p>CPU Soft Lockup event</p>
+<pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
+<pre><code class="bash">#kernel.softlockup_panic = 1</code></pre>
+<p></p>
+<p>Hung/Blocked Task event</p>
+<pre><code class="bash">#vi /etc/sysctl.conf</code></pre>
+<pre><code class="bash">#kernel.hung_task_panic = 1</code></pre>
+<p></p>
+<p>Now let's update grub config</p>
+<pre><code class="bash">#grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre>
+<p></p>
+<p></p>
+<p>Now start kdump service</p>
+<pre><code class="bash">#systemctl start kdump.service</code></pre>
+<pre><code class="bash">#systemctl enable kdump.service</code></pre>
+<p></p>
+<p>Now take reboot of the server, as we have changed some kernel parameters.</p>
+<p></p>
+<p>Now let's Crash then kernel</p>
+<p>The SysRq-Facility is a special key combination that, when enabled allows the user to force a system kernel to respond to a specific command. this feature is mostly for </p>
+<p>troubleshooting kernel-related problems or to force a response from a system while it is in a non-responsive state(hang).</p>
+<p></p>
+<pre><code class="bash">#echo 1> /proc/sys/kernel/sysrq</code></pre>
+<pre><code class="bash">#echo c> /proc/sysrq-trigger</code></pre>
+<p></p>
+<p>Now VM will be rebooted and go to /var/crash path to check if you kdump has been created here you will find directory name with timestamp and inside this directory you will see 2 files vmcore-dmesg.txt for booting log and vmcore, To analyze vmcore some additional packages are required.</p>
+<p></p>
+<p>How to Analyze Kdump</p>
+<p>below packages should be installed</p>
+<pre><code class="bash">#rpm -qa|grep -i crash</code></pre>
+<p></p>
+<pre><code class="bash">#rpm -qa kernel-debuginfo</code></pre>
+<p></p>
+<p>those 2 packages should be installed to analyze kdump vmcore.</p>
+<p></p>
+<p>Now follow below process to analyze vmcore</p>
+<p></p>
+<pre><code class="bash">#crash /lib/debug/lib/modules/$(uname -r)/vmlinux  /var/crash/timestampdirectory/vmcore</code></pre>
+<p>here in below shell now check which cause kernel panic</p>
+<pre><code class="bash">#crash>dis -l memroyaddress</code></pre>
+<p></p>
+<p>to check process details</p>
+<pre><code class="bash">#crash>ps</code></pre>
+<p>for checking mount point details</p>
+<pre><code class="bash">#crash>mount</code></pre>
+<p>for checking network details</p>
+<pre><code class="bash">#crash>net -a</code></pre>
+<p>to check panic task details</p>
+<pre><code class="bash">#crash> set -p</code></pre>
+</body>
+</html>
