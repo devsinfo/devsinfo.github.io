@@ -6,7 +6,9 @@
     <title>Understanding of the Kdump</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head> 
-<body><p>Kdump is a feature of the Linux kernel that creates crash dumps in the event of a kernel crash. When triggered, kdump exports a memory image that can be analyzed for the purposes of debugging and determining the cause of a crash</p>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Back to Home</a><p>Kdump is a feature of the Linux kernel that creates crash dumps in the event of a kernel crash. When triggered, kdump exports a memory image that can be analyzed for the purposes of debugging and determining the cause of a crash</p>
 <p></p>
 <p>Looking for some configuration for kernel dump (kdump), what will generate the kernel core dump file. Just for distinguish we are not talking about application, we are talking about OS itself crashing.</p>
 <p></p>
@@ -87,5 +89,6 @@
 <pre><code class="bash">#crash>net -a</code></pre>
 <p>to check panic task details</p>
 <pre><code class="bash">#crash> set -p</code></pre>
+</div>
 </body>
 </html>
